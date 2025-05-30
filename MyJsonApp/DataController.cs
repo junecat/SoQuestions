@@ -15,31 +15,31 @@ namespace MyJsonApp.Controllers
         }
 
         /// <summary>
-        /// Возвращает содержимое статического JSON файла
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ СЃРѕРґРµСЂР¶РёРјРѕРµ СЃС‚Р°С‚РёС‡РµСЃРєРѕРіРѕ JSON С„Р°Р№Р»Р°
         /// </summary>
         [HttpGet(Name = "GetData")]
         public IActionResult Get()
         {
             try
             {
-                // Путь к файлу относительно текущего каталога
+                // РџСѓС‚СЊ Рє С„Р°Р№Р»Сѓ РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ С‚РµРєСѓС‰РµРіРѕ РєР°С‚Р°Р»РѕРіР°
                 var filePath = Path.Combine(Directory.GetCurrentDirectory(), "src/source.json");
 
                 if (!System.IO.File.Exists(filePath))
-                    return NotFound("Файл 'source.json' не найден.");
+                    return NotFound("Р¤Р°Р№Р» 'source.json' РЅРµ РЅР°Р№РґРµРЅ.");
 
                 string jsonContent = System.IO.File.ReadAllText(filePath);
                 jsonContent = jsonContent.Replace("\r\n", "");
 
-                // Установка правильного типа содержимого
+                // РЈСЃС‚Р°РЅРѕРІРєР° РїСЂР°РІРёР»СЊРЅРѕРіРѕ С‚РёРїР° СЃРѕРґРµСЂР¶РёРјРѕРіРѕ
                 Response.ContentType = "application/json";
 
-                return Ok(jsonContent); // Ответ с успешным статусом 200 OK
+                return Ok(jsonContent); // РћС‚РІРµС‚ СЃ СѓСЃРїРµС€РЅС‹Рј СЃС‚Р°С‚СѓСЃРѕРј 200 OK
             }
             catch (IOException ex)
             {
                 _logger.LogError(ex.Message, ex.StackTrace);
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Ошибка при чтении файла: {ex.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, $"РћС€РёР±РєР° РїСЂРё С‡С‚РµРЅРёРё С„Р°Р№Р»Р°: {ex.Message}");
             }
         }
     }

@@ -9,17 +9,20 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        // Регистрация сервисов
-        builder.Services.AddControllers(); // Подключаем поддержку контроллеров
+	// Р’РµС€Р°СЋСЃСЊ РЅР° РѕРїСЂРµРґРµР»РµРЅРЅС‹Р№ С…РѕСЃС‚/РїРѕСЂС‚
+	builder.WebHost.UseUrls("http://0.0.0.0:5000", "https://0.0.0.0:5001");
 
-        // Включаем Swagger
+        // Р РµРіРёСЃС‚СЂР°С†РёСЏ СЃРµСЂРІРёСЃРѕРІ
+        builder.Services.AddControllers(); // РџРѕРґРєР»СЋС‡Р°РµРј РїРѕРґРґРµСЂР¶РєСѓ РєРѕРЅС‚СЂРѕР»Р»РµСЂРѕРІ
+
+        // Р’РєР»СЋС‡Р°СЋ Swagger
         builder.Services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc("v1", new OpenApiInfo
             {
                 Title = "My JSON App API",
                 Version = "v1",
-                Description = "Пример проекта ASP.NET Core с возвращением статического JSON файла."
+                Description = "РџСЂРёРјРµСЂ РїСЂРѕРµРєС‚Р° ASP.NET Core СЃ РІРѕР·РІСЂР°С‰РµРЅРёРµРј СЃС‚Р°С‚РёС‡РµСЃРєРѕРіРѕ JSON С„Р°Р№Р»Р°."
             });
         });
 
@@ -34,17 +37,17 @@ public class Program
         app.UseSwagger();
         app.UseSwaggerUI(c =>
         {
-            c.SwaggerEndpoint("/swagger/v1/swagger.json", "My JSON App V1"); // Отображаем документ
+            c.SwaggerEndpoint("/swagger/v1/swagger.json", "My JSON App V1"); // РћС‚РѕР±СЂР°Р¶Р°РµРј РґРѕРєСѓРјРµРЅС‚
         });
 
-        // Конвейер обработчиков запросов
+        // РљРѕРЅРІРµР№РµСЂ РѕР±СЂР°Р±РѕС‚С‡РёРєРѕРІ Р·Р°РїСЂРѕСЃРѕРІ
         // app.UseHttpsRedirection();
         app.UseRouting();
 
-        // Маршрутизация к контроллерам
+        // РњР°СЂС€СЂСѓС‚РёР·Р°С†РёСЏ Рє РєРѕРЅС‚СЂРѕР»Р»РµСЂР°Рј
         app.UseEndpoints(endpoints => endpoints.MapControllers());
 
-        // Запуск приложения
+        // Р—Р°РїСѓСЃРє РїСЂРёР»РѕР¶РµРЅРёСЏ
         app.Run();
     }
 }

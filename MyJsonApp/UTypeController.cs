@@ -14,7 +14,7 @@ namespace MyJsonApp.Controllers
         }
 
         /// <summary>
-        /// Возвращает мой тип как json
+        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ РјРѕР№ С‚РёРї РєР°Рє json
         /// </summary>
         [HttpGet(Name = "GetPerson")]
         public ActionResult<Person> Get()
